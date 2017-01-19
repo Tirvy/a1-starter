@@ -17,6 +17,12 @@
 
 </head>
 <body ng-controller="TestCtrl">
+<div my-dir>directive</div>
     {{test}}
+<div class="" ng-bind="test" ng-click="test = 'test';"></div>
+    <input type="text" ng-model="test">
+<div class="" ng-repeat="elem in arr" ng-click="clickThis(1)" ng-if="$index % 2 === 0">
+    {{elem}}
+</div>
 </body>
 </html>

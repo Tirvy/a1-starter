@@ -4,5 +4,17 @@
             function ($scope, $rootScope, $location, testService) {
                 $scope.test = 'HI';
 
+                $scope.arr = [];
+
+                $scope.clickThis = function (val) {
+                    $scope.test = val;
+                };
+                testService.sayHello();
+                for (var i = 0; i < 100; i++) {
+                    $scope.arr.push(i);
+                }
+                testService.getPhotographers().then(function (res) {
+                    console.log(res);
+                })
             }])
 })();
