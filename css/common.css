@@ -48,12 +48,12 @@ body{
     background-color: #eee;
     cursor: pointer;
 }
-input {
+input[type=text] {
     border-radius: 4px;
     padding: 1px 8px;
     height: 32px;
 }
-.albumSearch:focus{
+input[type=text]:focus{
     outline: none;
 }
 .albumListHeader:after {
