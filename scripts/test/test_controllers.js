@@ -22,7 +22,6 @@
                 $scope.album_list = false;
                 $scope.showAlbums = function (elem) {
                     testService.getAlbums(elem).then(function (res){
-                        console.log(res);
                         $scope.album_list = true;
                         $scope.albumList = res.data;
                     });
@@ -31,7 +30,6 @@
                 $scope.modal_form = false;
                 $scope.showPhotos = function (elem){
                     testService.getPhotos(elem).then(function (res) {
-                        console.log(res);
                         $scope.photoList = res.data;
                         $scope.modal_form = true;
                         $scope.photo_quantity_max = 10;

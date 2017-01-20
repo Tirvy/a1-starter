@@ -30,9 +30,13 @@
     </div>
     <table class="albumEntry">
         <tr>
-            <th ng-click="album_sort_type='userId'" ng-class="{albumListHeader:album_sort_type=='userId'}">UserId</th>
-            <th ng-click="album_sort_type='id'" ng-class="{albumListHeader:album_sort_type=='id'}">Id</th>
-            <th ng-click="album_sort_type='title'" ng-class="{albumListHeader:album_sort_type=='title'}">Title</th>
+            <th ng-click="album_sort_type = (album_sort_type=='userId' ? 'userId' : 'userIdR')"
+                ng-class="{albumListHeader:album_sort_type=='userId',
+                albumListHeaderR:album_sort_type=='userIdR'}">UserId</th>
+            <th ng-click="album_sort_type='id'"
+                ng-class="{albumListHeader:album_sort_type=='id', albumListHeaderR:album_sort_type=='idR'}">Id</th>
+            <th ng-click="album_sort_type='title'"
+                ng-class="{albumListHeader:album_sort_type=='title'}">Title</th>
         </tr>
         <tr ng-repeat="elem in albumList | filter:searchAlbumsBox | orderBy:album_sort_type" ng-click="showPhotos(elem)">
             <td>{{elem.userId}}</td>
@@ -41,7 +45,7 @@
         </tr>
     </table>
 </div>
-<div id="modal_form" ng-show="modal_form">
+<div id="modal_form" modal-Window="center" ng-show="modal_form">
     <h1 align="center">
         <div id="modal_close" ng-click="modal_form = false">x</div>
         <div ng-mousedown="form_moving=true;
