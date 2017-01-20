@@ -12,7 +12,18 @@ angular.module('test.directives', [])
 
             }
         };
-    }]);
+    }])
+
+    .directive('modalWindow', function(){
+        return {
+            restrict: 'EA',
+            link: function(scope, element) {
+                $('.modal_form').draggable({
+                    handle: '.modal_header'
+                });
+            }
+        }
+    });
    
 
 

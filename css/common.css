@@ -1,23 +1,55 @@
 body{
     padding: 0;
     margin: 0;
-    background-color: #dedede;
+    background-color: #f1f1f1;
+}
+.userEntryTable{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
 }
 .userEntry {
-    background-color: #fafafa;
+    background-color: #ffffff;
     color: #4d4d4d;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 2px 10px;
+    margin: 2px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 200px;
 }
 .userEntry:hover{
     background-color: #eee;
     cursor: pointer;
 }
-.userEntryTable{
-    max-width: 300px;
-    list-style-type: none;
-    float:left;
-    margin-right: 50px;
+.albumSearch{
+    border-radius: 4px;
+    padding: 1px 8px;
+    height: 32px;
+}
+.albumSearch:focus{
+    outline: none;
+}
+.albumListHeader{
+}
+.albumListHeader:after {
+    /*bottom: 100%;*/
+    /*left: 50%;*/
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    left: 15px;
+    top: 10px;
+    position: relative;
+    pointer-events: none;
+    border-color: rgba(213, 0, 0, 0);
+    border-top-color: #4d4d4d;
+    border-width: 5px;
+    margin-left: -10px;
 }
 .albumEntry{
     float:left;
@@ -32,14 +64,29 @@ body{
 {
     background-color: white;
 }
-.albumEntry tr:hover
+.albumEntry tr:hover:not(:nth-child(1))
 {
     background-color: #fafafa;
     cursor: pointer;
 }
+.albumEntry tr
+{
+    height: 30px;
+}
 .albumEntry td
 {
+    min-width: 90px;
     padding: 3px 5px;
+}
+.albumEntry td:not(:last-child)
+{
+    text-align: center;
+}
+
+.picView{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 /*modal window magic*/
@@ -54,8 +101,6 @@ body{
     left: 50%; /* пoлoвинa экрaнa слевa */
     margin-top: -150px;
     margin-left: -150px; /* тут вся мaгия центрoвки css, oтступaем влевo и вверх минус пoлoвину ширины и высoты сooтветственнo =) */
-    display: none; /* в oбычнoм сoстoянии oкнa не дoлжнo быть */
-    opacity: 0; /* пoлнoстью прoзрaчнo для aнимирoвaния */
     z-index: 5; /* oкнo дoлжнo быть нaибoлее бoльшем слoе */
     padding: 20px 10px;
     max-height: 300px;
@@ -66,6 +111,7 @@ body{
     width: 21px;
     height: 21px;
     position: absolute;
+    /*float:right;*/
     top: 5px;
     right: 5px;
     cursor: pointer;

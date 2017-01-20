@@ -17,7 +17,46 @@
 
 </head>
 <body ng-controller="TestCtrl">
-<div class="userEntryTable" ng-repeat="elem in photographersList">{{elem.name}}</div>
+<div class="userEntryTable">
+    <div class="userEntry" ng-repeat="elem in photographersList" ng-click="showAlbums(elem)">
+        <p>{{elem.name}}</p>
+        <p>{{elem.email}}</p>
+        <p>{{elem.phone}}</p>
+    </div>
+</div>
+<div ng-show="album_list">
+    <div>
+        <input class="albumSearch" type="text" placeholder="Search Albums" ng-model="searchAlbumsBox">
+    </div>
+    <table class="albumEntry">
+        <tr>
+            <th ng-click="album_sort_type='userId'" ng-class="{albumListHeader:album_sort_type=='userId'}">UserId</th>
+            <th ng-click="album_sort_type='id'" ng-class="{albumListHeader:album_sort_type=='id'}">Id</th>
+            <th ng-click="album_sort_type='title'" ng-class="{albumListHeader:album_sort_type=='title'}">Title</th>
+        </tr>
+        <tr ng-repeat="elem in albumList | filter:searchAlbumsBox | orderBy:album_sort_type" ng-click="showPhotos(elem)">
+            <td>{{elem.userId}}</td>
+            <td>{{elem.id}}</td>
+            <td>{{elem.title}}</td>
+        </tr>
+    </table>
+</div>
+<div id="modal_form" ng-show="modal_form">
+    <h1 align="center">
+        <div id="modal_close" ng-click="modal_form = false">x</div>
+        <div ng-mousedown="form_moving=true;
+        form_start_offset=$(modal_form).offset;
+        from_start_moffset=$()">Photos</div>
+    </h1>
+    <div class="picView">
+        <img  ng-repeat="elem in photoList | orderBy:'title' | limitTo:photo_quantity_max" ng-src="{{elem.thumbnailUrl}}">
+    </div>
+    <div ng-click="photo_quantity_max =  photo_quantity_max + 10">
+        <div ng-if="photo_quantity_max < photoList.length">
+            Load more
+        </div>
+    </div>
+</div>
 <!--<div my-dir>directive</div>-->
     <!--{{test}}-->
 <!--<div class="" ng-bind="test" ng-click="test = 'test';"></div>-->
