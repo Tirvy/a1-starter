@@ -14,5 +14,11 @@
             self.getPhotos = function (album) {
                 return $http.get('https://jsonplaceholder.typicode.com/photos?albumId=' + album.id);
             };
+            self.getPosts = function () {
+                return $http.get('https://jsonplaceholder.typicode.com/posts');
+            };
+            self.postPost = function (post) {
+                return $http.post('https://jsonplaceholder.typicode.com/posts', post);
+            };
         }])
 })();

@@ -35,5 +35,17 @@
                         $scope.photo_quantity_max = 10;
                     })
                 };
+
+
+                testService.getPosts().then(function (res) {
+                    $scope.postsList = res.data;
+                });
+
+                $scope.getUserById = function(data,id){
+                    console.log(data + "wowowo" + id);
+                    return data.find(function (elem) {
+                        return elem.id == id;
+                    });
+                }
             }])
 })();

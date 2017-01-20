@@ -46,6 +46,10 @@ angular.module('test.directives', [])
                 __elem.onmouseup = function (event) {
                     moving = false;
                 };
+
+                elem.find('div#modal_close')[0].onmousemove = function () {
+                    moving = false;
+                }
             }
         }
     }]);

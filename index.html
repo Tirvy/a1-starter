@@ -17,47 +17,68 @@
 
 </head>
 <body ng-controller="TestCtrl">
-<div class="userEntryTable">
-    <div class="userEntry" ng-repeat="elem in photographersList" ng-click="showAlbums(elem)">
-        <p>{{elem.name}}</p>
-        <p>{{elem.email}}</p>
-        <p>{{elem.phone}}</p>
+<div class="forms">
+    <div class="photoForm">
+        <div class="userEntryTable">
+            <div class="userEntry" ng-repeat="elem in photographersList" ng-click="direc=false; showAlbums(elem)">
+                <p>{{elem.name}}</p>
+                <p>{{elem.email}}</p>
+                <p>{{elem.phone}}</p>
+            </div>
+        </div>
+        <div ng-show="album_list">
+            <div>
+                <input class="albumSearch" type="text" placeholder="Search Albums" ng-model="searchAlbumsBox">
+            </div>
+            <table class="albumEntry">
+                <tr>
+                    <th ng-click="album_sort_type = 'userId'; direc = !direc"
+                        ng-class="{'albumListHeader':album_sort_type=='userId'&&direc,
+                        'albumListHeaderR':album_sort_type=='userId'&&!direc}">UserId</th>
+                    <th ng-click="album_sort_type = 'id'; direc = !direc"
+                        ng-class="{'albumListHeader':album_sort_type=='id'&&direc,
+                        'albumListHeaderR':album_sort_type=='id'&&!direc}">Id</th>
+                    <th ng-click="album_sort_type = 'title'; direc = !direc"
+                        ng-class="{'albumListHeader':album_sort_type=='title'&&direc,
+                        'albumListHeaderR':album_sort_type=='title'&&!direc}">Title</th>
+                </tr>
+                <tr ng-repeat="elem in albumList | filter:searchAlbumsBox
+                | orderBy:album_sort_type:!direc" ng-click="showPhotos(elem)">
+                    <td>{{elem.userId}}</td>
+                    <td>{{elem.id}}</td>
+                    <td>{{elem.title}}</td>
+                </tr>
+            </table>
+        </div>
+        <div id="modal_form" modal-Window="center" ng-show="modal_form">
+            <h1 align="center" style="margin:0">
+                <div>Photos</div>
+                <div id="modal_close" ng-click="modal_form = false">x</div>
+            </h1>
+            <div class="picView">
+                <img  ng-repeat="elem in photoList | orderBy:'title' | limitTo:photo_quantity_max" ng-src="{{elem.thumbnailUrl}}">
+            </div>
+            <div ng-click="photo_quantity_max =  photo_quantity_max + 10">
+                <div ng-if="photo_quantity_max < photoList.length">
+                    Load more
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div ng-show="album_list">
-    <div>
-        <input class="albumSearch" type="text" placeholder="Search Albums" ng-model="searchAlbumsBox">
-    </div>
-    <table class="albumEntry">
-        <tr>
-            <th ng-click="album_sort_type = (album_sort_type=='userId' ? 'userId' : 'userIdR')"
-                ng-class="{albumListHeader:album_sort_type=='userId',
-                albumListHeaderR:album_sort_type=='userIdR'}">UserId</th>
-            <th ng-click="album_sort_type='id'"
-                ng-class="{albumListHeader:album_sort_type=='id', albumListHeaderR:album_sort_type=='idR'}">Id</th>
-            <th ng-click="album_sort_type='title'"
-                ng-class="{albumListHeader:album_sort_type=='title'}">Title</th>
-        </tr>
-        <tr ng-repeat="elem in albumList | filter:searchAlbumsBox | orderBy:album_sort_type" ng-click="showPhotos(elem)">
-            <td>{{elem.userId}}</td>
-            <td>{{elem.id}}</td>
-            <td>{{elem.title}}</td>
-        </tr>
-    </table>
-</div>
-<div id="modal_form" modal-Window="center" ng-show="modal_form">
-    <h1 align="center">
-        <div id="modal_close" ng-click="modal_form = false">x</div>
-        <div ng-mousedown="form_moving=true;
-        form_start_offset=$(modal_form).offset;
-        from_start_moffset=$()">Photos</div>
-    </h1>
-    <div class="picView">
-        <img  ng-repeat="elem in photoList | orderBy:'title' | limitTo:photo_quantity_max" ng-src="{{elem.thumbnailUrl}}">
-    </div>
-    <div ng-click="photo_quantity_max =  photo_quantity_max + 10">
-        <div ng-if="photo_quantity_max < photoList.length">
-            Load more
+    <div class="postForm">
+        <div class="addPostForm">
+            <input type="text" placeholder="write your comment">
+            <button class="sendButton" text="send">purum</button>
+        </div>
+        <div class="comment_section">
+            <div class="comment" ng-repeat="elem in postsList">
+                <div class=comment__title">
+                    Author: {{getUserById(photographersList, elem.userId).name}}
+                </div>
+                <div class="comment__body">
+                    , said: {{elem.body}}
+                </div>
+            </div>
         </div>
     </div>
 </div>
