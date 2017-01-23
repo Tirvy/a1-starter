@@ -36,16 +36,30 @@
                     })
                 };
 
-
-                testService.getPosts().then(function (res) {
-                    $scope.postsList = res.data;
-                });
-
                 $scope.getUserById = function(data,id){
-                    console.log(data + "wowowo" + id);
                     return data.find(function (elem) {
                         return elem.id == id;
                     });
-                }
+                };
+
+                $scope.refreshPosts = function (res,status,headers) {
+                    console.log(res + '\n' + status + '\n' + headers);
+                    testService.getPosts().then(function (res) {
+                        console.log(res.data);
+                        $scope.postsList = res.data;
+                    });
+                };
+                $scope.refreshPosts();
+
+                function dedag() {
+                    console.log('sonsole.gol');
+                };
+                
+                $scope.makePost = function () {
+                    var sendObj = {userId : 1, body : $scope.postText, title : "wololo it worked!"};
+                    console.log(sendObj);
+                    testService.postPost(sendObj).then($scope.refreshPosts,dedag);
+                };
+
             }])
 })();

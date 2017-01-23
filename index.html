@@ -67,8 +67,8 @@
     </div>
     <div class="postForm">
         <div class="addPostForm">
-            <input type="text" placeholder="write your comment">
-            <button class="sendButton" text="send">purum</button>
+            <input type="text" placeholder="write your comment" ng-model="postText">
+            <button class="sendButton" text="send" ng-click="makePost()">purum</button>
         </div>
         <div class="comment_section">
             <div class="comment" ng-repeat="elem in postsList">
@@ -76,7 +76,7 @@
                     Author: {{getUserById(photographersList, elem.userId).name}}
                 </div>
                 <div class="comment__body">
-                    , said: {{elem.body}}
+                    said: {{elem.body}}
                 </div>
             </div>
         </div>

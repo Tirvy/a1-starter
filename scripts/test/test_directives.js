@@ -34,7 +34,7 @@ angular.module('test.directives', [])
                     mstartY = event.clientY;
                 };
 
-                __elem.onmousemove = function (event) {
+                window.onmousemove = function (event) {
                     if (moving == true) {
                         var x,y;
                         x = event.clientX - mstartX + startX;
@@ -43,7 +43,7 @@ angular.module('test.directives', [])
                     }
                 };
 
-                __elem.onmouseup = function (event) {
+                window.onmouseup = function (event) {
                     moving = false;
                 };
 
