@@ -15,13 +15,13 @@
                 // }
                 $scope.album_sort_type = 'title';
 
-                testService.getPhotographers().then(function (res) {
+                testService.getList(0).then(function (res) {
                     $scope.photographersList = res.data;
                 });
 
                 $scope.album_list = false;
                 $scope.showAlbums = function (elem) {
-                    testService.getAlbums(elem).then(function (res){
+                    testService.getList(1,elem.id).then(function (res){
                         $scope.album_list = true;
                         $scope.albumList = res.data;
                     });
@@ -29,7 +29,7 @@
 
                 $scope.modal_form = false;
                 $scope.showPhotos = function (elem){
-                    testService.getPhotos(elem).then(function (res) {
+                    testService.getList(2,elem.id).then(function (res) {
                         $scope.photoList = res.data;
                         $scope.modal_form = true;
                         $scope.photo_quantity_max = 10;
@@ -44,7 +44,7 @@
 
                 $scope.refreshPosts = function (res,status,headers) {
                     console.log(res + '\n' + status + '\n' + headers);
-                    testService.getPosts().then(function (res) {
+                    testService.getList(3).then(function (res) {
                         console.log(res.data);
                         $scope.postsList = res.data;
                     });
